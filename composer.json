@@ -1,0 +1,14 @@
+{
+    "name": "10up/doze",
+    "description": "Simple REST API for WordPress.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Mann",
+            "email": "eric.mann@10up.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+	"require-dev": {}
+}
