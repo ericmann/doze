@@ -1,21 +1,32 @@
 {
-    "name"             : "10up/doze",
-    "description"      : "Simple REST API for WordPress.",
-    "license"          : "MIT",
-    "authors"          : [
-        {
-            "name" : "Eric Mann",
-            "email": "eric@eamann.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require"          : {
-	    "10up/http": "dev-master"
-    },
-	"require-dev"      : {
-		"10up/wp_mock"        : "dev-master",
+	"name":              "10up/doze",
+	"description":       "Simple REST API for WordPress.",
+	"version":           "1.0.0",
+	"type":              "wordpress-library",
+	"keywords":          [],
+	"homepage":          "https://github.com/ericmann/doze",
+	"license":           "MIT",
+	"authors":           [
+		{
+			"name":     "Eric Mann",
+			"email":    "eric.mann@10up.com",
+			"homepage": "http://10up.com",
+			"role":     "Developer"
+		}
+	],
+	"repository":        {},
+	"minimum-stability": "stable",
+	"require":           {
+		"php":       ">=5.3",
+		"10up/http": "dev-master"
+	},
+	"require-dev":       {
+		"10up/wp_mock":         "dev-master",
 		"antecedent/patchwork": "1.2.*",
-		"phpunit/phpunit"     : "*@stable",
-		"brianium/paratest"   : "dev-master"
+		"phpunit/phpunit":      "*@stable",
+		"brianium/paratest":    "dev-master"
+	},
+	"autoload":          {
+		"classmap": ["php/"]
 	}
 }
