@@ -9,7 +9,9 @@
         }
     ],
     "minimum-stability": "stable",
-    "require"          : {},
+    "require"          : {
+	    "10up/http": "dev-master"
+    },
 	"require-dev"      : {
 		"10up/wp_mock"        : "dev-master",
 		"antecedent/patchwork": "1.2.*",

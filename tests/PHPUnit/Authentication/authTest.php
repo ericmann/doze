@@ -1,10 +1,10 @@
 <?php
-namespace TenUp\Doze;
+namespace TenUp\Doze\v1_0_0;
 
 /**
  * Class AuthTest
  *
- * @package TenUp\Doze
+ * @package Doze
  *
  * @group auth
  */
