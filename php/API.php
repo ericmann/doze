@@ -110,6 +110,8 @@ class API {
 	 * @uses __()
 	 * @uses esc_js()
 	 * @uses Request::current();
+	 *
+	 * @return bool
 	 */
 	protected function validate_request_method( $allowed ) {
 		$allowed = array_map( 'strtoupper', $allowed );
@@ -118,5 +120,7 @@ class API {
 		if ( ! in_array( $method, $allowed ) ) {
 			wp_send_json_error( esc_js( sprintf( __( '%s requests are not allowed', 'medicare' ), $method ) ) );
 		}
+
+		return true;
 	}
 }

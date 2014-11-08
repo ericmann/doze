@@ -4,8 +4,11 @@
     processIsolation="false"
     colors="false">
     <testsuites>
-        <testsuite name="auth">
-            <directory suffix="Test.php">./tests/PHPUnit/Authentication</directory>
+        <testsuite name="api">
+            <directory suffix="Test.php">./tests/PHPUnit</directory>
+        </testsuite>
+        <testsuite name="resources">
+            <directory suffix="Test.php">./tests/PHPUnit/Resources</directory>
         </testsuite>
     </testsuites>
     <groups>
