@@ -1,6 +1,7 @@
 <?php
 namespace TenUp\Doze\v1_0_0;
 
+use TenUp\HTTP\v1_0_0 as HTTP;
 use WP_Mock as M;
 
 /**
@@ -15,6 +16,55 @@ class APITest extends TestCase {
 	protected $testFiles = array(
 		'API.php',
 	);
+
+	public function setUp() {
+		parent::setUp();
+
+		// Since we're testing headers, explicitly clear them between tests.
+		new HTTP\Header();
+		HTTP\Header\clear();
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 */
+	public function test_cors_sends_headers() {
+		$request = \Mockery::mock( 'stdClass' )
+			->shouldReceive( 'globals' )
+			->andReturn( '' );
+		\Mockery::mock( 'alias:' . __NAMESPACE__ . '\\Request' )
+			->shouldReceive( 'current' )
+			->andReturn( $request->getMock() );
+
+		// Set up our API object such that the do_cors() function is accessible
+		$api = new API();
+		$api_class = new \ReflectionClass( $api );
+		$do_cors = $api_class->getMethod( 'do_cors' );
+		$do_cors->setAccessible( true );
+
+		$do_cors->invoke( $api );
+
+		$headers = HTTP\Header\get();
+
+		// Verify headers
+		$this->assertNotEmpty( $headers );
+		$this->assertEquals( 4, count( $headers ) );
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 */
+	public function test_cors_sends_allow_headers() {
+		$request = new \stdClass;
+		$request->globals = function( $key ) {
+			return 'header';
+		};
+		\Mockery::mock( 'alias:' . __NAMESPACE__ . '\\Request' )
+		        ->shouldReceive( 'current' )
+		        ->andReturn( $request );
+
+		$this->markTestIncomplete();
+	}
 
 	/**
 	 * @runInSeparateProcess
@@ -62,6 +112,9 @@ class APITest extends TestCase {
 		$this->assertTrue( $pass );
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
 	public function test_validate_request_method_disallows_nonwhitelisted_methods() {
 		// Set up our API object such that the validate_request_method() function is accessible
 		$api = new API();
