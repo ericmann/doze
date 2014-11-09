@@ -49,21 +49,39 @@ class APITest extends TestCase {
 		// Verify headers
 		$this->assertNotEmpty( $headers );
 		$this->assertEquals( 4, count( $headers ) );
+
+		$this->assertContains( 'Access-Control-Allow-Origin: *',                   $headers );
+		$this->assertContains( 'Access-Control-Allow-Credentials: true',           $headers );
+		$this->assertContains( 'Access-Control-Max-Age: 86400',                    $headers );
+		$this->assertContains( 'Access-Control-Allow-Methods: GET, POST, OPTIONS', $headers );
 	}
 
 	/**
 	 * @runInSeparateProcess
 	 */
 	public function test_cors_sends_allow_headers() {
-		$request = new \stdClass;
-		$request->globals = function( $key ) {
-			return 'header';
-		};
+		$request = \Mockery::mock( 'stdClass' )
+			->shouldReceive( 'globals' )
+			->andReturn( 'header' );
 		\Mockery::mock( 'alias:' . __NAMESPACE__ . '\\Request' )
 		        ->shouldReceive( 'current' )
-		        ->andReturn( $request );
+		        ->andReturn( $request->getMock() );
 
-		$this->markTestIncomplete();
+		// Set up our API object such that the do_cors() function is accessible
+		$api = new API();
+		$api_class = new \ReflectionClass( $api );
+		$do_cors = $api_class->getMethod( 'do_cors' );
+		$do_cors->setAccessible( true );
+
+		$do_cors->invoke( $api );
+
+		$headers = HTTP\Header\get();
+
+		// Verify headers
+		$this->assertNotEmpty( $headers );
+		$this->assertEquals( 5, count( $headers ) );
+
+		$this->assertContains( 'Access-Control-Allow-Headers: header', $headers );
 	}
 
 	/**
