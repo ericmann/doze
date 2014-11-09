@@ -88,17 +88,7 @@ class API {
 	 *
 	 * @return string
 	 */
-	public function get_auth( $request = null ) {
-		if ( null === $request ) {
-			$request = Request::current();
-		}
-
-		if ( isset( $request->headers ) && isset( $request->headers['Authorization'] ) ) {
-			return $request->headers['Authorization'];
-		}
-
-		return '';
-	}
+	public function get_auth( $request = null ) {}
 
 	/**
 	 * Validate an auth header against database credentials.
