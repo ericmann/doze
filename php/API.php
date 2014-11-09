@@ -82,6 +82,37 @@ class API {
 	}
 
 	/**
+	 * Retrieve an authentication header from the given request object.
+	 *
+	 * @param Request $request
+	 *
+	 * @return string
+	 */
+	public function get_auth( $request = null ) {
+		if ( null === $request ) {
+			$request = Request::current();
+		}
+
+		if ( isset( $request->headers ) && isset( $request->headers['Authorization'] ) ) {
+			return $request->headers['Authorization'];
+		}
+
+		return '';
+	}
+
+	/**
+	 * Validate an auth header against database credentials.
+	 * The auth header is using HTTP Basic:
+	 * i.e. base64( ‘user:password’ )
+	 *
+	 * @param string     $authentication
+	 * @param DataSource $datasource
+	 *
+	 * @returns bool
+	 */
+	public function validate_auth( $authentication, $datasource ) {}
+
+	/**
 	 * Configure and set up Cross Origin Access Control
 	 *
 	 * @uses TenUp\HTTP\v1_0_0\Header\add()
