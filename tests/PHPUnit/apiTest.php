@@ -30,7 +30,7 @@ class APITest extends TestCase {
 	 */
 	public function test_cors_sends_headers() {
 		$request = \Mockery::mock( 'stdClass' )
-			->shouldReceive( 'globals' )
+			->shouldReceive( 'super' )
 			->andReturn( '' );
 		\Mockery::mock( 'alias:' . __NAMESPACE__ . '\\Request' )
 			->shouldReceive( 'current' )
@@ -61,7 +61,7 @@ class APITest extends TestCase {
 	 */
 	public function test_cors_sends_allow_headers() {
 		$request = \Mockery::mock( 'stdClass' )
-			->shouldReceive( 'globals' )
+			->shouldReceive( 'super' )
 			->andReturn( 'header' );
 		\Mockery::mock( 'alias:' . __NAMESPACE__ . '\\Request' )
 		        ->shouldReceive( 'current' )

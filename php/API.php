@@ -116,7 +116,7 @@ class API {
 		Header\add( 'Access-Control-Max-Age',           '86400'              ); // Cache for one day
 		Header\add( 'Access-Control-Allow-Methods',     'GET, POST, OPTIONS' );
 
-		$headers = $request->globals( 'HTTP_ACCESS_CONTROL_REQUEST_HEADERS' );
+		$headers = $request->super( 'HTTP_ACCESS_CONTROL_REQUEST_HEADERS' );
 		if ( ! empty( $headers ) ) {
 			Header\add( 'Access-Control-Allow-Headers', $headers );
 		}

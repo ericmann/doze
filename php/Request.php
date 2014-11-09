@@ -28,7 +28,16 @@ class Request {
 	 *
 	 * @return string
 	 */
-	public function globals( $key ) {
+	public function super( $key ) {
+
+	}
+
+	/**
+	 * Get an array of request headers, including Authorization.
+	 *
+	 * @return array
+	 */
+	public function headers() {
 
 	}
 }
