@@ -48,7 +48,7 @@ class APITest extends TestCase {
 
 		// Verify headers
 		$this->assertNotEmpty( $headers );
-		$this->assertEquals( 4, count( $headers ) );
+		$this->assertEquals( 5, count( $headers ) );
 
 		$this->assertContains( 'Access-Control-Allow-Origin: *',                   $headers );
 		$this->assertContains( 'Access-Control-Allow-Credentials: true',           $headers );
@@ -79,7 +79,7 @@ class APITest extends TestCase {
 
 		// Verify headers
 		$this->assertNotEmpty( $headers );
-		$this->assertEquals( 5, count( $headers ) );
+		$this->assertEquals( 6, count( $headers ) );
 
 		$this->assertContains( 'Access-Control-Allow-Headers: header', $headers );
 	}

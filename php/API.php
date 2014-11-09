@@ -47,9 +47,8 @@ class API {
 
 		$resources = implode( '|', $this->resources );
 
-		add_rewrite_rule( 'api/(' . $resources . ')/([^/]+)/([^/]+)/?', 'index.php?api_resource=$matches[1]&item_id=$matches[2]&time_zone=$matches[3]', 'top' );
 		add_rewrite_rule( 'api/(' . $resources . ')/([^/]+)/?', 'index.php?api_resource=$matches[1]&item_id=$matches[2]', 'top' );
-		add_rewrite_rule( 'api/(' . $resources . ')/?',        'index.php?api_resource=$matches[1]',                     'top' );
+		add_rewrite_rule( 'api/(' . $resources . ')/?',        'index.php?api_resource=$matches[1]',                      'top' );
 	}
 
 	/**
@@ -111,10 +110,11 @@ class API {
 	protected function do_cors() {
 		$request = Request::current();
 
-		Header\add( 'Access-Control-Allow-Origin',      '*'                  );
-		Header\add( 'Access-Control-Allow-Credentials', 'true'               );
-		Header\add( 'Access-Control-Max-Age',           '86400'              ); // Cache for one day
-		Header\add( 'Access-Control-Allow-Methods',     'GET, POST, OPTIONS' );
+		Header\add( 'Access-Control-Allow-Origin',      '*'                       );
+		Header\add( 'Access-Control-Allow-Credentials', 'true'                    );
+		Header\add( 'Access-Control-Max-Age',           '86400'                   ); // Cache for one day
+		Header\add( 'Access-Control-Allow-Methods',     'GET, POST, OPTIONS'      );
+		Header\add( 'Content-Type',                     'application/json',  true );
 
 		$headers = $request->super( 'HTTP_ACCESS_CONTROL_REQUEST_HEADERS' );
 		if ( ! empty( $headers ) ) {
