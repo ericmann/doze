@@ -8,8 +8,8 @@
  * @version   1.0.0
  */
 namespace TenUp\Doze\v1_0_0;
-if ( version_compare( PHP_VERSION, "5.3", "<" ) ) {
-	trigger_error( "Doze requires PHP version 5.3.0 or higher", E_USER_ERROR );
+if ( version_compare( PHP_VERSION, "5.4", "<" ) ) {
+	trigger_error( "Doze requires PHP version 5.4.0 or higher", E_USER_ERROR );
 }
 
 // Require files
